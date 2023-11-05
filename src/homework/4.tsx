@@ -6,7 +6,7 @@ type Menu = { id: MenuIds; title: string };
 type MenuSelected = {
   selectedMenu: SelectedMenu;
 };
-type SelectedMenu = { id: MenuIds } | {}; // Додати тип для SelectedMenu він повинен містити { id }
+type SelectedMenu = { id?: MenuIds }; // Додати тип для SelectedMenu він повинен містити { id }
 type PropsProvider = {
   children: React.ReactNode; // Додати тип для children
 };
@@ -61,10 +61,8 @@ function MenuComponent({ menus }: PropsMenu) {
     <>
       {menus.map((menu) => (
         <div key={menu.id} onClick={() => onSelectedMenu({ id: menu.id })}>
-          {selectedMenu.hasOwnProperty("id") &&
-          (selectedMenu as { id: MenuIds }).id === menu.id
-            ? "Selected"
-            : "Not selected"}
+          {menu.title}
+          {menu.id === selectedMenu.id ? "Selected" : "Not selected"}
         </div>
       ))}
     </>
